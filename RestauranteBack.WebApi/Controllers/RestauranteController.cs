@@ -12,7 +12,6 @@ using RestauranteBack.WebApi.ViewModels.Restaurante;
 
 namespace RestauranteBack.WebApi.Controllers
 {
-    [EnableCors("CorsPolicy")]
     [Route("api/[controller]")]
     public class RestauranteController : IController
     {
@@ -73,6 +72,17 @@ namespace RestauranteBack.WebApi.Controllers
         [HttpPut("{id}")]
         public void Put(int id, [FromBody]string value)
         {
+            try
+            {
+                var RestauranteEntity = JsonConvert.DeserializeObject<Restaurante>(value);
+
+                _restauranteService.Atualiza(RestauranteEntity);
+            }
+            catch (Exception ex)
+            { 
+                throw ex;
+            }
+            
         }
         
         // DELETE: api/ApiWithActions/5

@@ -60,6 +60,8 @@ namespace RestauranteBack.WebApi.Controllers
             try
             {
                 var PratoEntity = JsonConvert.DeserializeObject<Prato>(value);
+                PratoEntity.RestauranteId = PratoEntity.Restaurante.RestauranteId;
+                PratoEntity.Restaurante = null;
                 _pratoService.Salvar(PratoEntity);
             }
             catch (Exception ex)
@@ -73,6 +75,19 @@ namespace RestauranteBack.WebApi.Controllers
         [HttpPut("{id}")]
         public void Put(int id, [FromBody]string value)
         {
+            try
+            {
+                var PratoEntity = JsonConvert.DeserializeObject<Prato>(value);
+                PratoEntity.RestauranteId = PratoEntity.Restaurante.RestauranteId;
+                PratoEntity.Restaurante = null;
+                _pratoService.Atualiza(PratoEntity);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            
         }
 
         // DELETE: api/ApiWithActions/5
