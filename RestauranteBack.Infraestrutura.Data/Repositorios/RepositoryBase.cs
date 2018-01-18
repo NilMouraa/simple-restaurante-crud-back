@@ -20,7 +20,13 @@ namespace RestauranteBack.Infraestrutura.Data.Repositorios
 
         public IList<TEntity> ObterTodos(string includes)
         {
-            return Db.Set<TEntity>().Include(includes).ToList();
+            if (string.IsNullOrEmpty(includes))
+            {
+                return Db.Set<TEntity>().ToList();
+            }
+            else { 
+                return Db.Set<TEntity>().Include(includes).ToList();
+            }
         }
 
         public IList<TEntity> ObterTodosOrdenacaoAscendente(string campo)
